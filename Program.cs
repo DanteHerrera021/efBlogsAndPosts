@@ -120,6 +120,8 @@ try
                     BlogId = blogIndex - 1
                 };
 
+                db.AddPost(post);
+
                 logger.Info($"Post added = \"{title}\"");
 
                 break;
