@@ -62,7 +62,7 @@ try
 
                 Console.WriteLine("Select the blog you would like to post to:");
 
-                var availableBlogs = db.Blogs.OrderBy(b => b.Name);
+                var availableBlogs = db.Blogs.OrderBy(b => b.BlogId);
 
                 logger.Info($"There are {availableBlogs.Count()} blog(s) available");
                 int index = 0;
@@ -100,7 +100,7 @@ try
 
                 // START CREATING POST
 
-                Console.WriteLine("Enter the post title");
+                Console.WriteLine("Enter the post's title");
                 string title = Console.ReadLine();
 
                 if (title == "" || title == null)
@@ -109,6 +109,18 @@ try
                     break;
                 }
 
+                Console.WriteLine("Enter the post's content");
+
+                string content = Console.ReadLine();
+
+                Post post = new Post
+                {
+                    Title = title,
+                    Content = content,
+                    BlogId = blogIndex - 1
+                };
+
+                logger.Info($"Post added = \"{title}\"");
 
                 break;
             case "4":
