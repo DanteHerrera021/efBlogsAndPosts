@@ -126,6 +126,18 @@ try
 
                 break;
             case "4":
+
+                Console.WriteLine("Select the blog's posts to display:");
+                Console.WriteLine("0) Posts from all blogs");
+
+                int bIndex = 1;
+                foreach (Blog b in db.Blogs)
+                {
+                    Console.WriteLine($"{bIndex}) {b.Name}");
+                    bIndex++;
+                }
+
+
                 break;
         }
 
