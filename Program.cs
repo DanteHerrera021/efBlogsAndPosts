@@ -38,8 +38,6 @@ try
                     Console.WriteLine(item.Name);
                 }
 
-                Console.WriteLine();
-
                 break;
 
             case "2":
@@ -58,16 +56,28 @@ try
                 db.AddBlog(blog);
                 logger.Info($"Blog added - \"{name}\"");
 
-                Console.WriteLine();
-
                 break;
 
             case "3":
+
+                Console.WriteLine("Select the blog you would like to post to:");
+
+                var availableBlogs = db.Blogs.OrderBy(b => b.Name);
+
+                logger.Info($"There are {availableBlogs.Count()} blog(s) available");
+                int index = 0;
+                foreach (var item in availableBlogs)
+                {
+                    index++;
+                    Console.WriteLine($"{index}) {item.Name}");
+                }
+
                 break;
             case "4":
                 break;
         }
 
+        Console.WriteLine();
 
     } while (input is "1" or "2" or "3" or "4");
 }
