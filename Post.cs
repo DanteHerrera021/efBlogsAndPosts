@@ -6,4 +6,9 @@ public class Post
 
     public int BlogId { get; set; }
     public Blog Blog { get; set; }
+
+    public void Display()
+    {
+        Console.WriteLine($"Blog: {Blog.Name}\nTitle: {Title}\nContent: {Content}");
+    }
 }

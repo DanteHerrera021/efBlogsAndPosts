@@ -117,7 +117,8 @@ try
                 {
                     Title = title,
                     Content = content,
-                    BlogId = blogIndex - 1
+                    BlogId = blogIndex - 1,
+                    Blog = selectedBlog
                 };
 
                 db.AddPost(post);
@@ -135,6 +136,16 @@ try
                 {
                     Console.WriteLine($"{bIndex}) {b.Name}");
                     bIndex++;
+                }
+
+                string postsFromBlogs = Console.ReadLine();
+
+                if (int.Parse(postsFromBlogs) == 0)
+                {
+                    foreach (Post p in db.Posts)
+                    {
+                        p.Display();
+                    }
                 }
 
 
