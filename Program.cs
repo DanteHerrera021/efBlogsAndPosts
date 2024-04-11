@@ -47,6 +47,12 @@ try
                 Console.Write("Enter a name for a new Blog: ");
                 var name = Console.ReadLine();
 
+                if (name == "" || name == null)
+                {
+                    logger.Error("Blog name cannot be null");
+                    break;
+                }
+
                 var blog = new Blog { Name = name };
 
                 db.AddBlog(blog);
