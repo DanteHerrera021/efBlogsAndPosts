@@ -72,6 +72,21 @@ try
                     Console.WriteLine($"{index}) {item.Name}");
                 }
 
+                string blogToPost = Console.ReadLine();
+
+                try
+                {
+                    int blogIndex = int.Parse(blogToPost);
+
+                    Blog selectedBlog = availableBlogs.ElementAt(blogIndex - 1);
+                }
+                catch
+                {
+                    logger.Error("Invalid Blog ID");
+                }
+
+
+
                 break;
             case "4":
                 break;
