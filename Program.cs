@@ -8,29 +8,45 @@ string path = Directory.GetCurrentDirectory() + "\\nlog.config";
 var logger = LogManager.LoadConfiguration(path).GetCurrentClassLogger();
 logger.Info("Program started");
 
+string input = "";
+
 try
 {
-
-
-
-    // Create and save a new Blog
-    Console.Write("Enter a name for a new Blog: ");
-    var name = Console.ReadLine();
-
-    var blog = new Blog { Name = name };
-
-    var db = new BloggingContext();
-    db.AddBlog(blog);
-    logger.Info("Blog added - {name}", name);
-
-    // Display all Blogs from the database
-    var query = db.Blogs.OrderBy(b => b.Name);
-
-    Console.WriteLine("All blogs in the database:");
-    foreach (var item in query)
+    do
     {
-        Console.WriteLine(item.Name);
-    }
+        Console.Write("Enter your selection:");
+        Console.Write("1) Display all blogs");
+        Console.Write("2) Add Blog");
+        Console.Write("3) Create Post");
+        Console.Write("4) Display posts");
+        Console.Write("Enter q to quit");
+
+        input = Console.ReadLine();
+
+        logger.Info($"Option \"{input}\" selected");
+
+        switch (input)
+        {
+            case "1":
+
+
+
+                break;
+
+            case "2":
+
+
+
+                break;
+
+            case "3":
+                break;
+            case "4":
+                break;
+        }
+
+
+    } while (input is "1" or "2" or "3" or "4");
 }
 catch (Exception ex)
 {
