@@ -140,14 +140,46 @@ try
 
                 string postsFromBlogs = Console.ReadLine();
 
-                if (int.Parse(postsFromBlogs) == 0)
+                Blog selectedB;
+                int selectedBlogIndex;
+                try
+                {
+                    selectedBlogIndex = int.Parse(postsFromBlogs);
+                    selectedB = db.Blogs.ElementAt(selectedBlogIndex - 1);
+                }
+                catch
+                {
+                    logger.Error("Invalid choice");
+                    break;
+                }
+
+                selectedBlogIndex = int.Parse(postsFromBlogs);
+
+                selectedB = db.Blogs.ElementAt(selectedBlogIndex);
+
+                int displayedBlogs = 0;
+
+                if (selectedBlogIndex == 0)
                 {
                     foreach (Post p in db.Posts)
                     {
                         p.Display();
+                        displayedBlogs++;
+                    }
+                }
+                else
+                {
+                    foreach (Post p in db.Posts)
+                    {
+                        if (p.BlogId == selectedBlogIndex - 1)
+                        {
+                            p.Display();
+                            displayedBlogs++;
+                        }
                     }
                 }
 
+                logger.Info($"{displayedBlogs} Blogs returned");
 
                 break;
         }
