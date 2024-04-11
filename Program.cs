@@ -74,17 +74,27 @@ try
 
                 string blogToPost = Console.ReadLine();
 
+                int blogIndex;
                 try
                 {
-                    int blogIndex = int.Parse(blogToPost);
-
-                    Blog selectedBlog = availableBlogs.ElementAt(blogIndex - 1);
+                    blogIndex = int.Parse(blogToPost);
                 }
                 catch
                 {
                     logger.Error("Invalid Blog ID");
                 }
+                blogIndex = int.Parse(blogToPost);
 
+                Blog selectedBlog;
+                try
+                {
+                    selectedBlog = availableBlogs.ElementAt(blogIndex - 1);
+                }
+                catch
+                {
+                    logger.Error("There are no Blogs saved with that ID");
+                }
+                selectedBlog = availableBlogs.ElementAt(blogIndex - 1);
 
 
                 break;
