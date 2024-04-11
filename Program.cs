@@ -43,7 +43,7 @@ try
             case "2":
 
                 Console.Write("Enter a name for a new Blog: ");
-                var name = Console.ReadLine();
+                string name = Console.ReadLine();
 
                 if (name == "" || name == null)
                 {
@@ -82,6 +82,7 @@ try
                 catch
                 {
                     logger.Error("Invalid Blog ID");
+                    break;
                 }
                 blogIndex = int.Parse(blogToPost);
 
@@ -93,8 +94,20 @@ try
                 catch
                 {
                     logger.Error("There are no Blogs saved with that ID");
+                    break;
                 }
                 selectedBlog = availableBlogs.ElementAt(blogIndex - 1);
+
+                // START CREATING POST
+
+                Console.WriteLine("Enter the post title");
+                string title = Console.ReadLine();
+
+                if (title == "" || title == null)
+                {
+                    logger.Error("Post title cannot be null");
+                    break;
+                }
 
 
                 break;
