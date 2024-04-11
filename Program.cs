@@ -9,17 +9,18 @@ var logger = LogManager.LoadConfiguration(path).GetCurrentClassLogger();
 logger.Info("Program started");
 
 string input = "";
+var db = new BloggingContext();
 
 try
 {
     do
     {
-        Console.Write("Enter your selection:");
-        Console.Write("1) Display all blogs");
-        Console.Write("2) Add Blog");
-        Console.Write("3) Create Post");
-        Console.Write("4) Display posts");
-        Console.Write("Enter q to quit");
+        Console.WriteLine("Enter your selection:");
+        Console.WriteLine("1) Display all blogs");
+        Console.WriteLine("2) Add Blog");
+        Console.WriteLine("3) Create Post");
+        Console.WriteLine("4) Display posts");
+        Console.WriteLine("Enter q to quit");
 
         input = Console.ReadLine();
 
@@ -29,7 +30,15 @@ try
         {
             case "1":
 
+                var query = db.Blogs.OrderBy(b => b.Name);
 
+                Console.WriteLine($"{query.Count()} Blogs returned");
+                foreach (var item in query)
+                {
+                    Console.WriteLine(item.Name);
+                }
+
+                Console.WriteLine();
 
                 break;
 
