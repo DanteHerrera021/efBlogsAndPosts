@@ -44,7 +44,15 @@ try
 
             case "2":
 
+                Console.Write("Enter a name for a new Blog: ");
+                var name = Console.ReadLine();
 
+                var blog = new Blog { Name = name };
+
+                db.AddBlog(blog);
+                logger.Info($"Blog added - \"{name}\"");
+
+                Console.WriteLine();
 
                 break;
 
