@@ -60,13 +60,13 @@ try
 
             case "3":
 
+                var blogsList = db.Blogs.OrderBy(b => b.Name).ToList();
+
                 Console.WriteLine("Select the blog you would like to post to:");
 
-                var availableBlogs = db.Blogs.OrderBy(b => b.BlogId);
-
-                logger.Info($"There are {availableBlogs.Count()} blog(s) available");
+                logger.Info($"There are {blogsList.Count()} blog(s) available");
                 int index = 0;
-                foreach (var item in availableBlogs)
+                foreach (var item in blogsList)
                 {
                     index++;
                     Console.WriteLine($"{index}) {item.Name}");
@@ -86,17 +86,19 @@ try
                 }
                 blogIndex = int.Parse(blogToPost);
 
+                logger.Info($"User selected {blogsList[blogIndex - 1].Name}");
+
                 Blog selectedBlog;
                 try
                 {
-                    selectedBlog = availableBlogs.ElementAt(blogIndex - 1);
+                    selectedBlog = blogsList.ToList().ElementAt(blogIndex - 1);
                 }
                 catch
                 {
                     logger.Error("There are no Blogs saved with that ID");
                     break;
                 }
-                selectedBlog = availableBlogs.ElementAt(blogIndex - 1);
+                selectedBlog = blogsList[blogIndex - 1];
 
                 // START CREATING POST
 
@@ -128,11 +130,13 @@ try
                 break;
             case "4":
 
+                var listOfBlogs = db.Blogs.OrderBy(b => b.Name).ToList();
+
                 Console.WriteLine("Select the blog's posts to display:");
                 Console.WriteLine("0) Posts from all blogs");
 
                 int bIndex = 1;
-                foreach (Blog b in db.Blogs)
+                foreach (Blog b in listOfBlogs)
                 {
                     Console.WriteLine($"{bIndex}) {b.Name}");
                     bIndex++;
@@ -144,8 +148,11 @@ try
                 int selectedBlogIndex;
                 try
                 {
-                    selectedBlogIndex = int.Parse(postsFromBlogs);
-                    selectedB = db.Blogs.ElementAt(selectedBlogIndex - 1);
+                    if (postsFromBlogs != "0")
+                    {
+                        selectedBlogIndex = int.Parse(postsFromBlogs);
+                        selectedB = listOfBlogs[selectedBlogIndex - 1];
+                    }
                 }
                 catch
                 {
@@ -154,8 +161,6 @@ try
                 }
 
                 selectedBlogIndex = int.Parse(postsFromBlogs);
-
-                selectedB = db.Blogs.ElementAt(selectedBlogIndex);
 
                 int displayedBlogs = 0;
 
@@ -169,6 +174,8 @@ try
                 }
                 else
                 {
+                    selectedB = listOfBlogs[selectedBlogIndex - 1];
+
                     foreach (Post p in db.Posts)
                     {
                         if (p.BlogId == selectedBlogIndex - 1)
