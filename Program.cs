@@ -21,6 +21,7 @@ try
         Console.WriteLine("2) Add Blog");
         Console.WriteLine("3) Create Post");
         Console.WriteLine("4) Display posts");
+        Console.WriteLine("5) Delete Blog");
         Console.WriteLine("Enter q to quit");
 
         input = Console.ReadLine();
@@ -216,11 +217,16 @@ try
                 logger.Info($"{displayedBlogs} Blogs returned");
 
                 break;
+            case "5":
+
+                Console.WriteLine("Choose the blog to delete:");
+
+                break;
         }
 
         Console.WriteLine();
 
-    } while (input is "1" or "2" or "3" or "4");
+    } while (input is "1" or "2" or "3" or "4" or "5");
 }
 catch (Exception ex)
 {
