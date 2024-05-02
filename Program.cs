@@ -221,6 +221,13 @@ try
 
                 Console.WriteLine("Choose the blog to delete:");
 
+                var delBlog = GetBlog(db, logger);
+                if (delBlog != null)
+                {
+                    db.DeleteBlog(delBlog);
+                    logger.Info($"Blog (id: {delBlog.BlogId}) deleted");
+                }
+
                 break;
         }
 
@@ -234,3 +241,23 @@ catch (Exception ex)
 }
 
 logger.Info("Program ended");
+
+static Blog GetBlog(BloggingContext db, Logger logger)
+{
+    // display all blogs
+    var blogs = db.Blogs.OrderBy(b => b.BlogId);
+    foreach (Blog b in blogs)
+    {
+        Console.WriteLine($"{b.BlogId}: {b.Name}");
+    }
+    if (int.TryParse(Console.ReadLine(), out int BlogId))
+    {
+        Blog blog = db.Blogs.FirstOrDefault(b => b.BlogId == BlogId);
+        if (blog != null)
+        {
+            return blog;
+        }
+    }
+    logger.Error("Invalid Blog Id");
+    return null;
+}
